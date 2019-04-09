@@ -40,6 +40,12 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <C-Left> <C-W>h
+nnoremap <C-Right> <C-W>l
+nnoremap <C-Up> <C-W>k
+nnoremap <C-Down> <C-W>j
 nmap <F8> :TagbarToggle<CR>
 nnoremap <F12> :YcmCompleter GoTo<CR>
 nnoremap <F10> :YcmCompleter FixIt<CR>
+
+set tabstop=4

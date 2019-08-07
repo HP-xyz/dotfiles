@@ -81,6 +81,9 @@ prompt_end() {
   fi
   echo -n "%{%f%}"
   CURRENT_BG=''
+  
+  #Adds the new line and ➜ as the start character.
+  printf "\n ➜";
 }
 
 ### Prompt components
@@ -113,24 +116,29 @@ prompt_virtualenv() {
 prompt_status() {
   local -a symbols
 
-  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
-  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
+  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}:("
+  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}!!⚡!!"
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
 
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
 
-#AWS Profile:
-# - display current AWS_PROFILE name
-# - displays yellow on red if profile name contains 'production' or
-#   ends in '-prod'
-# - displays black on green otherwise
-prompt_aws() {
-  [[ -z "$AWS_PROFILE" ]] && return
-  case "$AWS_PROFILE" in
-    *-prod|*production*) prompt_segment red yellow  "AWS: $AWS_PROFILE" ;;
-    *) prompt_segment green black "AWS: $AWS_PROFILE" ;;
-  esac
+# Stolen from bash
+# PS1=( `sed -n 's/MemFree:[\t ]\+\([0-9]\+\) kB/\1/p' /proc/meminfo`/1024))'\033[38;5;22m/'$((`sed -n 's/MemTotal:[\t ]\+\([0-9]\+\) kB/\1/Ip' /proc/meminfo`/1024 ))MB"\t\033[m\033[38;5;55m$(< /proc/loadavg)\033[m"
+prompt_sysinfo() {
+  local uptime=$((`uptime | awk '{print "Uptime: "$3" "substr($4, 0, length($4))}'`))
+  if [[ "OSTYPE" == "darwin" ]]; then
+    local mem_total=$((`sysctl hw.memsize`))
+	local mem_free="$mem_total" - ($((`sysctl hw.physmem`)) + $((`sysctl hw.usermem`)))
+	local cores=$((`sysctl -n hw.ncpu`))
+	local info="$mem_free" + "/" + "$mem_total"
+	prompt_segment green white "$info"
+  else
+	local mem_total=$((`awk '/MemTotal/ { printf "%.f \n", $2/1024 }' /proc/meminfo`))
+    local mem_free=$((`awk '/MemFree/ { printf "%.f \n", $2/1024 }' /proc/meminfo`))
+	local cores=$((`cat /proc/cpuinfo | grep -c "cpu cores"`))
+	local avg_load=$((`uptime | awk -F'[a-z]: ' '{print $2}' | awk -F", " '{gsub(",", ".",$1); print $1"/"cores " " $2"/"cores " " $3"/"cores}' cores="$cores"`))
+  fi
 }
 
 ## Main prompt
@@ -138,8 +146,8 @@ build_prompt() {
   RETVAL=$?
   prompt_status
   prompt_virtualenv
-  prompt_aws
   prompt_context
+  prompt_sysinfo
   prompt_dir
   prompt_end
 }

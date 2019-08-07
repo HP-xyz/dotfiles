@@ -126,11 +126,13 @@ prompt_status() {
 # Stolen from bash
 # PS1=( `sed -n 's/MemFree:[\t ]\+\([0-9]\+\) kB/\1/p' /proc/meminfo`/1024))'\033[38;5;22m/'$((`sed -n 's/MemTotal:[\t ]\+\([0-9]\+\) kB/\1/Ip' /proc/meminfo`/1024 ))MB"\t\033[m\033[38;5;55m$(< /proc/loadavg)\033[m"
 prompt_sysinfo() {
-  local uptime=$((`uptime | awk '{print "Uptime: "$3" "substr($4, 0, length($4))}'`))
+  #local uptime=$((`uptime | awk '{print "Uptime: "$3" "substr($4, 0, length($4))}'`))
   if [[ "OSTYPE" == "darwin" ]]; then
-    local mem_total=$((`sysctl hw.memsize`))
-	local mem_free="$mem_total" - ($((`sysctl hw.physmem`)) + $((`sysctl hw.usermem`)))
-	local cores=$((`sysctl -n hw.ncpu`))
+    local mem_total=$((`sysctl hw.memsize | awk -F" " '{print $2}'`))
+	local phys_mem=$((`sysctl hw.physmem | awk -F" " '{print $2}'`))
+	local user_mem=$((`sysctl hw.usermem | awk -F" " '{print $2}'`))
+	local mem_free="$mem_total" - ("$phys_mem" + "$user_mem")
+	#local cores=$((`sysctl -n hw.ncpu`))
 	local info="$mem_free" + "/" + "$mem_total"
 	prompt_segment green white "$info"
   else

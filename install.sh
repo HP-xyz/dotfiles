@@ -87,11 +87,11 @@ fi
 if [ ! -d "$HOME/.zsh/themes/spaceship-prompt" ]; then
 	echo "Copy spaceship-prompt theme (clone)"
 	git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.zsh/themes/spaceship-prompt"
-	cp "$HOME/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.zsh/themes/spaceship.zsh-theme"
+	cp "$HOME/.zsh/themes/spaceship.zsh-theme" "$HOME/themes/spaceship-prompt/spaceship.zsh-theme"
 else
 	echo "Copy spaceship-prompt theme (pull)"
 	git -C $HOME/.zsh/themes/spaceship-prompt pull
-	cp "$HOME/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.zsh/themes/spaceship.zsh-theme"
+	cp "$HOME/.zsh/themes/spaceship.zsh-theme" "$HOME/themes/spaceship-prompt/spaceship.zsh-theme"
 fi
 
 echo "Done"

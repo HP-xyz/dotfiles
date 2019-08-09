@@ -1,7 +1,13 @@
 #!/bin/bash
+set -e
+
+if [ ! -f $HOME/.zshrc ] || [ ! -L $HOME/.zshrc ]; then
+	echo "Install zsh first"
+	exit 1
+fi
 
 if [ ! -d $HOME/.oh-my-zsh ]; then
-	echo "Install om-my-zsh first"
+	echo "Install oh-my-zsh first"
 	exit 1
 fi
 
@@ -45,6 +51,12 @@ if ! grep -q .bash_ps1 $HOME/.bashrc; then
 fi
 
 ### ZSH STUFF
+if [ -f $HOME/.zshrc ]; then
+	echo "Creating .zshrc symlink"
+	rm $HOME/.zshrc
+	ln -l $(pwd)/.zshrc $HOME/.zshrc
+fi
+
 if ! grep -q .aliases $HOME/.zshrc; then
 	echo "Adding .aliases to .bashrc"
 	echo 'if [ -f $HOME/.aliases ]; then' >> $HOME/.zshrc

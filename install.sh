@@ -93,4 +93,44 @@ else
 	git -C $HOME/.zsh/themes/spaceship-prompt pull
 fi
 
+echo "Disabling unused spaceship parts:"
+echo "  -hg"
+sed --follow-symlinks -i -e "s/hg            # Mercurial section (hg_branch  + hg_status)/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh 
+echo "  -package"
+sed --follow-symlinks -i -e "s/package       # Package version/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -nodejs"
+sed --follow-symlinks -i -e "s/node          # Node.js section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -ruby"
+sed --follow-symlinks -i -e "s/ruby          # Ruby section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -elixir"
+sed --follow-symlinks -i -e "s/elixir        # Elixir section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -golang"
+sed --follow-symlinks -i -e "s/golang        # Go section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+#echo "-php"
+#sed --follow-symlinks -i -e "s/php           # PHP section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -rust"
+sed --follow-symlinks -i -e "s/rust          # Rust section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -haskell"
+sed --follow-symlinks -i -e "s/haskell       # Haskell Stack section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -julia"
+sed --follow-symlinks -i -e "s/julia         # Julia section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -aws"
+sed --follow-symlinks -i -e "s/aws           # Amazon Web Services section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -venv"
+sed --follow-symlinks -i -e "s/venv          # virtualenv section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -conda"
+sed --follow-symlinks -i -e "s/conda         # conda virtualenv section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -dotnet"
+sed --follow-symlinks -i -e "s/dotnet        # .NET section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -ember"
+sed --follow-symlinks -i -e "s/ember         # Ember.js section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -kubecontext"
+sed --follow-symlinks -i -e "s/kubecontext   # Kubectl context section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+echo "  -terraform"
+sed --follow-symlinks -i -e "s/terraform     # Terraform workspace section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+#sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+#sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+#sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+
+
 echo "Done"

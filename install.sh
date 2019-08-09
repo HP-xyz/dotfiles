@@ -51,6 +51,11 @@ if ! grep -q .bash_ps1 $HOME/.bashrc; then
 fi
 
 ### ZSH STUFF
+if [ ! -d $HOME/.zsh ]; then
+	echo "Creating zsh custom directory"
+	mkdir $HOME/.zsh
+fi
+
 if [ -f $HOME/.zshrc ]; then
 	echo "Creating .zshrc symlink"
 	rm $HOME/.zshrc
@@ -79,9 +84,9 @@ if [ ! -L $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme ]; then
 	ln -s $(pwd)/.oh-my-zsh/themes/agnoster-hp.zsh-theme $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme
 fi
 
-if [ ! -f "$ZSH_CUSTOM/themes/spaceship-prompt" ]; then
-	git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-	ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+if [ ! -f "$HOME/.zsh/themes/spaceship-prompt" ]; then
+	git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.zsh/themes/spaceship-prompt"
+	ln -s "$HOME/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.zsh/themes/spaceship.zsh-theme"
 fi
 
 echo "Done"

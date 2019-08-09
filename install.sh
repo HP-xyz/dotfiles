@@ -85,9 +85,15 @@ if [ ! -L $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme ]; then
 fi
 
 if [ ! -f "$HOME/.zsh/themes/spaceship-prompt" ]; then
-	echo "Creating spaceship.zsh-theme symlink"
+	echo "Copy spaceship-prompt theme (clone)"
 	git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.zsh/themes/spaceship-prompt"
-	ln -s "$HOME/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.zsh/themes/spaceship.zsh-theme"
+	cp "$HOME/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.zsh/themes/spaceship.zsh-theme"
+else
+	echo "Copy spaceship-prompt theme (pull)"
+	git -C $HOME/.zsh/themes/spaceship-prompt pull
+	cp "$HOME/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.zsh/themes/spaceship.zsh-theme"
+else
+	
 fi
 
 echo "Done"

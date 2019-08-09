@@ -67,4 +67,9 @@ if [ ! -L $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme ]; then
 	ln -s $(pwd)/.oh-my-zsh/themes/agnoster-hp.zsh-theme $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme
 fi
 
+if [ ! -f "$ZSH_CUSTOM/themes/spaceship-prompt" ]; then
+	git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+	ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+fi
+
 echo "Done"

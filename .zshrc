@@ -70,7 +70,7 @@ ZSH_CUSTOM=~/.zsh/
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
 
-source $HOME/oh-my-zsh.sh
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
 # User configuration
 

@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+ZSH_THEME="powerlevel10k"
 
 if [ ! -f $HOME/.zshrc ] && [ ! -L $HOME/.zshrc ]; then
 	echo "Install zsh first"
@@ -79,58 +80,68 @@ if [ ! -L $HOME/shell ]; then
 	ln -s $(pwd)/shell $HOME/shell
 fi
 
-if [ ! -L $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme ]; then
-	echo "Creating .oh-my-zsh/themes/agnoster-hp.zsh-theme symlink"
-	ln -s $(pwd)/.oh-my-zsh/themes/agnoster-hp.zsh-theme $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme
-fi
+if [ $ZSH_THEME = "agnoster" ]; then
+    if [ ! -L $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme ]; then
+	    echo "Creating .oh-my-zsh/themes/agnoster-hp.zsh-theme symlink"
+    	ln -s $(pwd)/.oh-my-zsh/themes/agnoster-hp.zsh-theme $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme
+    fi
+elif [ $ZSH_THEME = "spaceship" ]; then
+    if [ ! -L "$HOME/.zsh/themes/spaceship.zsh-theme" ]; then
+	    echo "Cloning and symlinking spaceship-prompt"
+    	git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.zsh/themes/spaceship-prompt"
+    	ln -s "$HOME/.zsh/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.zsh/themes/spaceship.zsh-theme"
+    else
+    	echo "Updating spaceship-prompt"
+    	git -C $HOME/.zsh/themes/spaceship-prompt pull
+    fi
 
-if [ ! -L "$HOME/.zsh/themes/spaceship.zsh-theme" ]; then
-	echo "Cloning and symlinking spaceship-prompt"
-	git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.zsh/themes/spaceship-prompt"
-	ln -s "$HOME/.zsh/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.zsh/themes/spaceship.zsh-theme"
+    echo "Disabling unused spaceship parts:"
+    echo "  -hg"
+    sed --follow-symlinks -i -e "s/hg            # Mercurial section (hg_branch  + hg_status)/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh 
+    echo "  -package"
+    sed --follow-symlinks -i -e "s/package       # Package version/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -nodejs"
+    sed --follow-symlinks -i -e "s/node          # Node.js section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -ruby"
+    sed --follow-symlinks -i -e "s/ruby          # Ruby section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -elixir"
+    sed --follow-symlinks -i -e "s/elixir        # Elixir section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -golang"
+    sed --follow-symlinks -i -e "s/golang        # Go section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    #echo "-php"
+    #sed --follow-symlinks -i -e "s/php           # PHP section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -rust"
+    sed --follow-symlinks -i -e "s/rust          # Rust section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -haskell"
+    sed --follow-symlinks -i -e "s/haskell       # Haskell Stack section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -julia"
+    sed --follow-symlinks -i -e "s/julia         # Julia section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -aws"
+    sed --follow-symlinks -i -e "s/aws           # Amazon Web Services section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -venv"
+    sed --follow-symlinks -i -e "s/venv          # virtualenv section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -conda"
+    sed --follow-symlinks -i -e "s/conda         # conda virtualenv section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -dotnet"
+    sed --follow-symlinks -i -e "s/dotnet        # .NET section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -ember"
+    sed --follow-symlinks -i -e "s/ember         # Ember.js section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -kubecontext"
+    sed --follow-symlinks -i -e "s/kubecontext   # Kubectl context section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    echo "  -terraform"
+    sed --follow-symlinks -i -e "s/terraform     # Terraform workspace section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    #sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    #sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
+    #sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
 else
-	echo "Updating spaceship-prompt"
-	git -C $HOME/.zsh/themes/spaceship-prompt pull
+    if [ ! -L "$HOME/.zsh/themes/powerlevel10k.zsh-theme" ]; then
+        echo "Cloning and symlinking powerlevel10k"
+        git clone https://github.com/romkatv/powerlevel10k.git $HOME/.zsh/themes/powerlevel10k
+        ln -s "$HOME/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme" "$HOME/.zsh/themes/powerlevel10k.zsh-theme"
+    else
+        echo "Updating powerlevel10k"
+        git -C $HOME/.zsh/themes/powerlevel10k pull
+    fi
 fi
-
-echo "Disabling unused spaceship parts:"
-echo "  -hg"
-sed --follow-symlinks -i -e "s/hg            # Mercurial section (hg_branch  + hg_status)/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh 
-echo "  -package"
-sed --follow-symlinks -i -e "s/package       # Package version/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -nodejs"
-sed --follow-symlinks -i -e "s/node          # Node.js section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -ruby"
-sed --follow-symlinks -i -e "s/ruby          # Ruby section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -elixir"
-sed --follow-symlinks -i -e "s/elixir        # Elixir section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -golang"
-sed --follow-symlinks -i -e "s/golang        # Go section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-#echo "-php"
-#sed --follow-symlinks -i -e "s/php           # PHP section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -rust"
-sed --follow-symlinks -i -e "s/rust          # Rust section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -haskell"
-sed --follow-symlinks -i -e "s/haskell       # Haskell Stack section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -julia"
-sed --follow-symlinks -i -e "s/julia         # Julia section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -aws"
-sed --follow-symlinks -i -e "s/aws           # Amazon Web Services section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -venv"
-sed --follow-symlinks -i -e "s/venv          # virtualenv section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -conda"
-sed --follow-symlinks -i -e "s/conda         # conda virtualenv section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -dotnet"
-sed --follow-symlinks -i -e "s/dotnet        # .NET section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -ember"
-sed --follow-symlinks -i -e "s/ember         # Ember.js section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -kubecontext"
-sed --follow-symlinks -i -e "s/kubecontext   # Kubectl context section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-echo "  -terraform"
-sed --follow-symlinks -i -e "s/terraform     # Terraform workspace section/ /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-#sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-#sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-#sed --follow-symlinks -i -e "s// /g" $HOME/.zsh/themes/spaceship-prompt/spaceship.zsh
-
 
 echo "Done"

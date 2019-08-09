@@ -70,6 +70,12 @@ ZSH_CUSTOM=~/.zsh
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
 
+#spaceship oh-my-zsh theme settings
+SPACESHIP_TIME_SHOW=true
+#SPACESHIP_TIME_PREFIX=""
+SPACESHIP_DIR_PREFIX=
+SPACESHIP_PACKAGE_SHOW=false
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

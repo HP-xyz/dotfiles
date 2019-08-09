@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if [ ! -f $HOME/.zshrc ] || [ ! -L $HOME/.zshrc ]; then
+if [ ! -f $HOME/.zshrc ] && [ ! -L $HOME/.zshrc ]; then
 	echo "Install zsh first"
 	exit 1
 fi
@@ -54,7 +54,7 @@ fi
 if [ -f $HOME/.zshrc ]; then
 	echo "Creating .zshrc symlink"
 	rm $HOME/.zshrc
-	ln -l $(pwd)/.zshrc $HOME/.zshrc
+	ln -s $(pwd)/.zshrc $HOME/.zshrc
 fi
 
 if ! grep -q .aliases $HOME/.zshrc; then

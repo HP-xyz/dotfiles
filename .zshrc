@@ -121,6 +121,7 @@ setopt HIST_IGNORE_SPACE
 
 #Source shell files
 source ~/shell/tmux
+source ~/.aliases
 
 # Fix TMUX Window title
 if [[ -e ~/shell/termsupport.zsh ]] ; then
@@ -131,4 +132,3 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-alias cmakec='export CC=clang && export CXX=clang++ && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'

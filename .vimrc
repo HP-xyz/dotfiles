@@ -60,6 +60,7 @@ nnoremap <F10> :YcmCompleter FixIt<CR>
 
 set tabstop=4
 set encoding=utf-8
+set backspace=indent,eol,start
 
 autocmd VimEnter * nested :call tagbar#autoopen(1)
 autocmd FileType * nested :call tagbar#autoopen(0)

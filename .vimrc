@@ -1,5 +1,5 @@
+syntax on
 set nocompatible              " be iMproved, required
-set tabstop=8
 set softtabstop=0
 set expandtab
 set shiftwidth=4
@@ -19,6 +19,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,6 +41,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let mapleader = "<Space>"
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_concepts_highlight = 1
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -54,3 +59,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 nnoremap <F10> :YcmCompleter FixIt<CR>
 
 set tabstop=4
+set encoding=utf-8
+
+autocmd VimEnter * nested :call tagbar#autoopen(1)
+autocmd FileType * nested :call tagbar#autoopen(0)

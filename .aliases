@@ -2,4 +2,4 @@
 
 alias cmakec='export CC=clang && export CXX=clang++ && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
 alias ll='ls -al'
-alias tizonia='docker-tizonia'
+alias tizonia='snap run tizonia'

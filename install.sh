@@ -31,6 +31,16 @@ if [ ! -L $HOME/.aliases ]; then
 	ln -s $(pwd)/.aliases $HOME/.aliases
 fi
 
+### i3 STUFF ###
+if [ ! -L $HOME/.bash_ps1 ]; then
+    echo "Creating symlinks for i3"
+    mkdir -p $HOME/.config/i3
+    ln -s $(pwd)/.config/i3/config $HOME/.config/i3/config
+    ln -s $(pwd)/i3scripts $HOME/i3scripts
+    ln -s $(pwd)/.i3blocks.conf $HOME/.i3blocks.conf
+    echo "exec i3" >> $HOME/.xinitrc
+fi
+
 ### BASH STUFF
 if [ ! -L $HOME/.bash_ps1 ]; then
 	echo "Creating .bash_ps1 symlink"

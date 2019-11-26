@@ -1,5 +1,10 @@
 #!/bin/sh
+. $HOME/shell/common-shell-lib.sh
 
 alias cmakec='export CC=clang && export CXX=clang++ && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
 alias ll='ls -al'
 alias tizonia='snap run tizonia'
+alias scp='scp -p '
+
+# Git Aliases
+alias prune_git_branches='GIT_deleteLocalMergedBranches'

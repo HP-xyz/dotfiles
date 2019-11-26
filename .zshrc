@@ -121,7 +121,7 @@ setopt HIST_IGNORE_SPACE
 
 #Source shell files
 source ~/shell/tmux
-source ~/.aliases
+source ~/shell/.aliases
 
 # Fix TMUX Window title
 if [[ -e ~/shell/termsupport.zsh ]] ; then

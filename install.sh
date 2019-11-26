@@ -90,6 +90,11 @@ if [ ! -L $HOME/shell ]; then
 	ln -s $(pwd)/shell $HOME/shell
 fi
 
+if [ ! -d $HOME/antigen ]; then
+    echo "Cloning antigen"
+    git clone https://github.com/zsh-users/antigen.git $HOME/antigen
+fi
+
 if [ $ZSH_THEME = "agnoster" ]; then
     if [ ! -L $HOME/.oh-my-zsh/themes/agnoster-hp.zsh-theme ]; then
 	    echo "Creating .oh-my-zsh/themes/agnoster-hp.zsh-theme symlink"

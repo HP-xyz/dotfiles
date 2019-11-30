@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -137,3 +144,25 @@ export PATH=/usr/sbin:$PATH
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export VISUAL=/usr/local/bin/vim
+export EDITOR="$VISUAL"
+
+#ANTIGEN
+source $HOME/antigen/antigen.zsh
+
+antigen bundle gko/ssh-connect
+antigen bundle "MichaelAquilina/zsh-you-should-use"
+antigen bundle supercrabtree/k
+antigen bundle oldratlee/hacker-quotes
+antigen bundle joepvd/grep2awk
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle fcambus/ansiweather
+
+antigen apply
+
+#eval $(thefuck --alias)

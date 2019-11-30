@@ -2,9 +2,13 @@
 . $HOME/shell/common-shell-lib.sh
 
 alias cmakec='export CC=clang && export CXX=clang++ && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
-alias ll='ls -al'
+alias ll='exa -al'
+#alias ll='ls -al'
 alias tizonia='snap run tizonia'
 alias scp='scp -p '
 
 # Git Aliases
 alias prune_git_branches='GIT_deleteLocalMergedBranches'
+alias create_mysql_docker='sudo docker run --name=mysql-server --net=host -e MYSQL_ROOT_PASSWORD=1Sch@ken0 -d mysql:5.6.46'
+alias start_mysql_docker='sudo docker start /mysql-server'
+alias mysql_client_docker='mysql -h 127.0.0.1 -P 3306 --protocol=tcp -uroot -p'

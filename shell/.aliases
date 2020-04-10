@@ -6,6 +6,11 @@ alias ll='exa -al'
 #alias ll='ls -al'
 alias tizonia='snap run tizonia'
 alias scp='scp -p '
+alias cp='rsync -ah --progress'
+
+if [ -f $HOME/shell/.work_aliases ]; then
+    . $HOME/shell/.work_aliases
+fi
 
 # Git Aliases
 alias prune_git_branches='GIT_deleteLocalMergedBranches'

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+getLatestLogRemote()
+{
+    latest_log_name=$(ssh $1 ls -ltr /dss/log | grep LocationsNode | tail -n 1 | grep -o -E "LocationsNode\.json[\.|_].*log")
+}
+
+tail_remote()
+{
+    getLatestLogRemote $1
+    ssh -t $1 tail -f /dss/log/$latest_log_name | lnav -q
+}
+
+alias tail_accept='tail_remote "accept-tdf"'
+alias tail_test='tail_remote "test-tdf"'
+alias tail_generic='tail_remote'

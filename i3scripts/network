@@ -19,7 +19,7 @@
 
 # Use the provided interface, otherwise the device used for the default route.
 IF="${IFACE:-$BLOCK_INSTANCE}"
-IF="${IF:-$(/usr/sbin/ip route | awk '/^default/ { print $5 ; exit }')}"
+IF="${IF:-$(/sbin/ip route | awk '/^default/ { print $5 ; exit }')}"
 
 # Exit if there is no default route
 [[ -z "$IF" ]] && exit
@@ -58,7 +58,7 @@ for flag in "$1" "$2"; do
     fi
 
 # if no interface is found, use the first device with a global scope
-IPADDR=$(/usr/sbin/ip addr show $IF | perl -n -e "/$AF ([^ \/]+).* scope global/ && print \$1 and exit")
+IPADDR=$(/sbin/ip addr show $IF | perl -n -e "/$AF ([^ \/]+).* scope global/ && print \$1 and exit")
 
 case $BLOCK_BUTTON in
    3) echo -n "$IPADDR" | xclip -q -se c ;;

@@ -8,6 +8,8 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+ZSH_DISABLE_COMPFIX=1
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -141,12 +143,13 @@ fi
 
 # Fix for /usr/sbin not being in path (wtf centos)
 export PATH=/usr/sbin:$PATH
+export PATH=/home/heinrichpotgieter/.cargo/bin:$PATH
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
-export VISUAL=/usr/local/bin/vim
+export VISUAL=/usr/bin/vim
 export EDITOR="$VISUAL"
 
 #ANTIGEN
@@ -162,7 +165,13 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle fcambus/ansiweather
+antigen bundle lukechilds/zsh-nvm
 
 antigen apply
 
 #eval $(thefuck --alias)
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi 
+
+emulate sh -c 'source /etc/profile'

@@ -174,4 +174,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi 
 
+PATH="$PATH:$HOME/.cargo/bin"
+
 emulate sh -c 'source /etc/profile'

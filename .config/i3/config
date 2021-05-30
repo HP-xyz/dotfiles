@@ -66,10 +66,10 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+Mod4+Left move workspace to output left
-bindsym $mod+Mod4+Down move workspace to output down
-bindsym $mod+Mod4+Up move workspace to output up
-bindsym $mod+Mod4+Right move workspace to output right
+#bindsym $mod+Mod4+Left move workspace to output left
+#bindsym $mod+Mod4+Down move workspace to output down
+#bindsym $mod+Mod4+Up move workspace to output up
+#bindsym $mod+Mod4+Right move workspace to output right
 
 # split in horizontal orientation
 bindsym $mod+d split h
@@ -184,3 +184,5 @@ exec thunderbird
 exec clion&
 exec terminator -x tmux
 exec --no-startup-id clipster -d
+exec --no-startup-id nm-applet
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

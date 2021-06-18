@@ -53,6 +53,8 @@ nnoremap <F8> :TagbarToggle<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F12> :YcmCompleter GoTo<CR>
 nnoremap <F10> :YcmCompleter FixIt<CR>
+nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
+nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 
 set tabstop=4
 set encoding=utf-8

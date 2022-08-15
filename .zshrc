@@ -42,7 +42,7 @@ HYPHEN_INSENSITIVE="true"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -174,6 +174,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi 
 
-PATH="$PATH:$HOME/.cargo/bin"
+PATH="$PATH:$HOME/.cargo/bin:$HOME/.emacs.d/bin"
 
 emulate sh -c 'source /etc/profile'
+alias taildss='~/taildss.sh'
+alias taildss2='~/taildss2.sh'

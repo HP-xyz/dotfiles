@@ -17,3 +17,5 @@ alias prune_git_branches='GIT_deleteLocalMergedBranches'
 alias create_mysql_docker='sudo docker run --name=mysql-server --net=host -e MYSQL_ROOT_PASSWORD=1Sch@ken0 -d mysql:5.6.46'
 alias start_mysql_docker='sudo docker start /mysql-server'
 alias mysql_client_docker='mysql -h 127.0.0.1 -P 3306 --protocol=tcp -uroot -p'
+alias vim="nvim"
+alias git_recent="git for-each-ref --sort=-committerdate refs/remotes refs/heads --format='%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always --count=${count:=50} | column -ts'|'"
